@@ -1,0 +1,25 @@
+name: 'kenya_road_safety'
+version: '1.0.0'
+config-version: 2
+
+profile: 'kenya_road_safety'
+
+model-paths:  ["models"]
+seed-paths:   ["seeds"]
+test-paths:   ["tests"]
+macro-paths:  ["macros"]
+
+target-path:    "target"
+clean-targets:  ["target", "dbt_packages"]
+
+models:
+  kenya_road_safety:
+    staging:
+      +materialized: view
+      +schema: DBT_DEV
+    intermediate:
+      +materialized: view
+      +schema: DBT_DEV
+    marts:
+      +materialized: table
+      +schema: ANALYTICS

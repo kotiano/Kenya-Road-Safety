@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: mart_road_safety_kpis
+    description: One row per year. Primary table for Power BI KPI cards, trend charts, donut.
+    columns:
+      - name: accident_year
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values: [2019, 2020, 2021, 2022, 2023, 2024]
+      - name: total_fatalities
+        tests:
+          - not_null
+      - name: pedestrian_pct
+        description: Must be 30–55% based on NTSA historical range
+        tests:
+          - not_null
+      - name: fatality_rate_pct
+        tests:
+          - not_null
+
+  - name: mart_hotspot_roads
+    description: Top 10 roads ranked by fatal accidents 2024.
+    columns:
+      - name: road_name
+        tests: [not_null, unique]
+      - name: fatality_rank
+        tests: [not_null, unique]
+
+  - name: mart_accident_causes
+    description: NTSA 13 causes — 2023 vs 2022 incident counts.
+    columns:
+      - name: cause
+        tests: [not_null, unique]
+      - name: incidents_2023
+        tests: [not_null]
+
+  - name: mart_monthly_fatalities
+    description: Monthly 2024 vs 2023 comparison.
+    columns:
+      - name: month_num
+        tests: [not_null, unique]

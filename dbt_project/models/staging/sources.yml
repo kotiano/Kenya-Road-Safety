@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: ntsa_raw
+    database: ROAD_SAFETY
+    schema: RAW
+    description: >
+      Raw NTSA data loaded by the AWS Glue job from S3.
+      Sources: NTSA Annual Reports, KNBS Economic Survey 2025,
+      Kenya Police Service Traffic Department, NTSA DG press statements.
+
+    tables:
+      - name: annual_fatalities
+        description: Annual totals — fatalities, accidents, injuries 2019–2024
+        columns:
+          - name: YEAR
+            tests: [not_null, unique]
+          - name: TOTAL_FATALITIES
+            tests: [not_null]
+
+      - name: road_user_fatalities
+        description: Fatality split by road user category per year
+        columns:
+          - name: YEAR
+            tests: [not_null, unique]
+
+      - name: accident_causes
+        description: NTSA 13 Leading Causes Report 2023
+        columns:
+          - name: CAUSE
+            tests: [not_null, unique]
+
+      - name: monthly_fatalities
+        description: Month-by-month 2024 vs 2023
+        columns:
+          - name: MONTH_NUM
+            tests: [not_null, unique]
+
+      - name: hotspot_roads
+        description: Top 10 roads by fatal accidents — NTSA DG Feb 2024
+        columns:
+          - name: ROAD_NAME
+            tests: [not_null, unique]
+
+      - name: county_data
+        description: County-level accidents and fatalities 2022–2023
+        columns:
+          - name: COUNTY
+            tests: [not_null, unique]
