@@ -1,0 +1,10 @@
+__pycache__/
+venv/
+.env
+snowflake_credentials.json
+profiles.yml.local
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+dbt_project/.user.yml
+*.pbix.bak
